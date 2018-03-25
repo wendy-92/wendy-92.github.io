@@ -796,6 +796,148 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.wuyudie.com/2017/09/01/s6变量的解构赋值/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wendy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wendy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/01/s6变量的解构赋值/" itemprop="url">es6变量的解构赋值</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T15:18:00+08:00">
+                2017-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构<br>1、模式匹配<br>只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值。<br>2、解构赋值允许指定默认值<br>如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候，才会求值。<br>3、对象的解构赋值<br>而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。<br>变量名与属性名不一致，必须写成下面这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var &#123; foo: baz &#125; = &#123; foo: &apos;aaa&apos;, bar: &apos;bbb&apos; &#125;;</span><br><span class="line">baz // &quot;aaa&quot;</span><br></pre></td></tr></table></figure></p>
+<p>对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。<br>对象的解构赋值也可以指定默认值<br>如果解构模式是嵌套的对象，而且子对象所在的父属性不存在，那么将会报错。<br>4、数组的解构赋值<br>类似数组的对象都有一个length属性，因此还可以对这个属性解构赋值。<br>5、字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。同理，解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const [a, b, c, d, e] = &apos;hello&apos;;</span><br><span class="line">a // &quot;h&quot;</span><br><span class="line">b // &quot;e&quot;</span><br><span class="line">c // &quot;l&quot;</span><br><span class="line">d // &quot;l&quot;</span><br><span class="line">e // &quot;o&quot;</span><br></pre></td></tr></table></figure></p>
+<p>5、函数参数的解构赋值。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function move(&#123;x = 0, y = 0&#125; = &#123;&#125;) &#123;//&#123;&#125;是默认值为&#123;&#125;的意思，如果不传&#123;&#125;，那么在undefined和null的时候就会报错。</span><br><span class="line">  return [x, y];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">move(&#123;x: 3, y: 8&#125;); // [3, 8]</span><br><span class="line">move(&#123;x: 3&#125;); // [3, 0]</span><br><span class="line">move(&#123;&#125;); // [0, 0]</span><br><span class="line">move(); // [0, 0]</span><br></pre></td></tr></table></figure>
+<p>下面的写法会得到不一样的结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function move(&#123;x, y&#125; = &#123; x: 0, y: 0 &#125;) &#123;//</span><br><span class="line">  return [x, y];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">move(&#123;x: 3, y: 8&#125;); // [3, 8]</span><br><span class="line">move(&#123;x: 3&#125;); // [3, undefined]</span><br><span class="line">move(&#123;&#125;); // [undefined, undefined]</span><br><span class="line">move(); // [0, 0]</span><br></pre></td></tr></table></figure></p>
+<p>6、建议只要有可能，就不要在模式中放置圆括号。<br>7、用途<br>（1）在面试中遇到过，如果交换变量的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let x = 1;</span><br><span class="line">let y = 2;</span><br><span class="line"></span><br><span class="line">[x, y] = [y, x];</span><br></pre></td></tr></table></figure></p>
+<p>（2）从函数返回多个值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 返回一个数组</span><br><span class="line"></span><br><span class="line">function example() &#123;</span><br><span class="line">  return [1, 2, 3];</span><br><span class="line">&#125;</span><br><span class="line">let [a, b, c] = example();</span><br><span class="line"></span><br><span class="line">// 返回一个对象</span><br><span class="line"></span><br><span class="line">function example() &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    foo: 1,</span><br><span class="line">    bar: 2</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">let &#123; foo, bar &#125; = example();</span><br></pre></td></tr></table></figure></p>
+<p>（3）函数参数的定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 参数是一组有次序的值</span><br><span class="line">function f([x, y, z]) &#123; ... &#125;</span><br><span class="line">f([1, 2, 3]);</span><br><span class="line"></span><br><span class="line">// 参数是一组无次序的值</span><br><span class="line">function f(&#123;x, y, z&#125;) &#123; ... &#125;</span><br><span class="line">f(&#123;z: 3, y: 2, x: 1&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>（4）提取 JSON 数据<br>（5）函数参数的默认值<br>（6）遍历 Map 结构<br>（7）输入模块的指定方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; SourceMapConsumer, SourceNode &#125; = require(&quot;source-map&quot;);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.wuyudie.com/2017/09/01/es6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1390,6 +1532,141 @@ createMenu({
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.wuyudie.com/2017/07/07/article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wendy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wendy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/07/article/" itemprop="url">2017计划</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-07T16:53:00+08:00">
+                2017-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计划/" itemprop="url" rel="index">
+                    <span itemprop="name">计划</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>2017计划</p>
+<p>&#x2610;  搭建hexo博客,并开始写笔记<br><br>&#x2610;  css3+svg学习，并且学习D3<br><br>&#x2610;  完成typescript,flow,vue学习demo<br><br>&#x2610;  完成阅读如下清单<br><br> -你不知道的JS<br> -js函数式编程指南</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1435,7 +1712,7 @@ createMenu({
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
